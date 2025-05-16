@@ -2,7 +2,7 @@ pipeline {
     agent { label 'jenkins-node' }
 
     triggers {
-      pollSCM ('* * * * *')
+      pollSCM ('H/5 * * * *')
 }
 
     stages{
