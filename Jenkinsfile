@@ -20,7 +20,7 @@ pipeline {
     stage('Build Docker Image') {
       steps {
         script {
-          docker.build("nouu94/myhello:${env.BUILD_NUMBER},your-dockerid/myhello:latest")
+          docker.build("nouu94/myhello:${env.BUILD_NUMBER},nouu94/myhello:latest")
         }
       }
     }
