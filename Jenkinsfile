@@ -21,6 +21,7 @@ pipeline {
       steps {
         script {
           docker.build("nouu94/myhello:${env.BUILD_NUMBER}")
+	  docker.build("nouu94/myhello:latest")
         }
       }
     }
