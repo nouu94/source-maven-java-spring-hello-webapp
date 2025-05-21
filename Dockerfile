@@ -1,6 +1,6 @@
 FROM maven:3-openjdk-17 AS mbuilder
 RUN mkdir /hello
-RUN git clone <URL> /hello
+RUN git clone https://github.com/nouu94/source-maven-java-spring-hello-webapp.git /hello
 WORKDIR /hello
 RUN mvn package
 
