@@ -40,16 +40,30 @@ pipeline {
 
         stage('Update Kubernetes Manifests file') {
             steps {
-                dir('k8s-manifests') {  
+                dir('k8s-manifests') {
                     git branch: 'master',
                          url: 'https://github.com/nouu94/mykube-resource2.git',
-                         credentialsId: 'k8s-manifests-update-token'
+		
+		script {
+		  withCredentials([usernamePassword(
+		  credentialsId: 'k8s-manifests-update-token',
+		    usernameVariable: 'GIT_USER',
+		    passwordVariable: 'GIT_TOKEN'
+		  )]) {
 
-                    sh "sed -i 's|image: nouu94/myhello:.*|image: nouu94/myhello:${env.BUILD_NUMBER}|' deployment.yaml"
-                    
-                    sh 'git add .'
-                    sh "git commit -m '[CI] Update image tag to ${env.BUILD_NUMBER}'"
-                    sh 'git push --set-upstream origin master'
+		    sh "sed -i 's|image: nouu94/myhello:.*|image: nouu94/myhello:${env.BUILD_NUMBER}|' deployment.yaml"
+
+		    sh 'git config user.name "nouu94"'
+		    sh 'git config user.email "nouu30133@naver.com"'
+
+		    
+		    sh 'git remote set-url origin https://${GIT_USER}:${GIT_TOKEN}@github.com/nouu94/mykube-resource2.git'
+
+		    sh 'git add .'
+		    sh "git commit -m '[CI] Update image tag to ${env.BUILD_NUMBER}' || echo 'Nothing to commit'"
+		    sh 'git push origin master'
+		}
+	    }
                 }
             }
         }
