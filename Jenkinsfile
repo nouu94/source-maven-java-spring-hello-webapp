@@ -48,7 +48,7 @@ pipeline {
                     
                     sh 'git add .'
                     sh "git commit -m '[CI] Update image tag to ${env.BUILD_NUMBER}'"
-                    sh 'git push'
+                    sh 'git push --set-upstream origin master'
                 }
             }
         }
