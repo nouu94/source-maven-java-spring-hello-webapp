@@ -43,7 +43,6 @@ pipeline {
                 dir('k8s-manifests') {  
                     git branch: 'main',
                          url: 'https://github.com/nouu94/mykube-resource2.git',
-                         credentialsId: 'github-credentials'
 
                     sh "sed -i 's|image: nouu94/myhello:.*|image: nouu94/myhello:${env.BUILD_NUMBER}|' deployment.yaml"
                     
