@@ -42,7 +42,7 @@ pipeline {
             steps {
                 dir('k8s-manifests') {
                     git branch: 'master',
-                         url: 'https://github.com/nouu94/mykube-resource2.git',
+                         url: 'https://github.com/nouu94/mykube-resource2.git'
 		
 		script {
 		  withCredentials([usernamePassword(
